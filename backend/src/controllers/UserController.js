@@ -12,10 +12,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUser = exports.loginUser = exports.registerUser = void 0;
+exports.validate = exports.getUser = exports.loginUser = exports.registerUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const models_1 = require("../models");
 const mongoose_1 = __importDefault(require("mongoose"));
+const validate = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    let Validation = true;
+    if (Validation) {
+        res.json({
+            message: 'Validation succsessful',
+            username: req.body.username,
+            password: req.body.password,
+        });
+        next();
+    }
+    else {
+        res.json({
+            message: 'Validation Failed'
+        });
+    }
+});
+exports.validate = validate;
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password, email } = req.body;
     bcrypt_1.default.hash(password, 10, (hashError, hash) => {
@@ -58,7 +75,6 @@ const loginUser = (req, res) => {
     let validate = username == dbUsername && password == dbPassword ? 'Login success' : 'Login Failed';
     res.json({
         message: 'Login user',
-        validate,
         username,
         password
     });

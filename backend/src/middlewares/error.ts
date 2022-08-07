@@ -5,7 +5,7 @@ export const ErrorRoute = (req: Request, res: Response) => {
 
     console.error(error);
 
-    res.status(404).json({
+    res.json({
       method: req.method,
       status: 404,
       message: `${error.message} It seems like you are got error somewhere`

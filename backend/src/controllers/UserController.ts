@@ -1,7 +1,26 @@
-import { Request, Response } from "express"
+import { NextFunction, Request, Response } from "express"
 import bcrypt from 'bcrypt';
 import { UserModel } from "../models";
 import mongoose from "mongoose";
+import { rest } from "lodash";
+
+const validate = async (req: Request, res: Response, next: NextFunction) => {
+  let Validation = true
+
+  if(Validation) {
+    res.json({
+      message: 'Validation succsessful',
+      username: req.body.username,
+      password: req.body.password,
+      
+    })
+    next()
+  } else {
+    res.json({
+      message: 'Validation Failed'
+    })
+  }
+}
 
 const registerUser = async (req: Request, res: Response) => {
   const { username, password, email } = req.body
@@ -50,7 +69,6 @@ const loginUser = (req: Request, res: Response) => {
 
   res.json({
     message: 'Login user',
-    validate,
     username,
     password
   })
@@ -61,4 +79,4 @@ const getUser = (req: Request, res: Response) => {
   console.log('Getting user')
 }
 
-export { registerUser, loginUser, getUser }
+export { registerUser, loginUser, getUser, validate }
