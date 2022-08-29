@@ -10,7 +10,7 @@ const app = express();
 mongoose
   .connect(String(Config.mongourl))
   .then(() => {
-    console.info('Mongo connected successfully.');
+    console.info('Mongo connected successfully!');
     startServer()
   })
   .catch((e) => {

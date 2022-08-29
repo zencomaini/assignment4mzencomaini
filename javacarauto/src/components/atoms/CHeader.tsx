@@ -34,7 +34,7 @@ const CHeader: React.FC = () => {
         </button>
         <nav className="md:flex">
           <ul className="">
-            <li><a href="./home">home</a></li>
+            <li><a href="./">home</a></li>
           </ul>
           <ul className="md:flex md:absolute gap-3 right-12">
             <li><a href="./inputAccessories">accessories</a></li>
